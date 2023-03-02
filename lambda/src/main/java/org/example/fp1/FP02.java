@@ -1,8 +1,9 @@
 package org.example.fp1;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class FP02Structured {
+public class FP02 {
 
 
     public static void main(String[] args) {
@@ -15,8 +16,13 @@ public class FP02Structured {
       exercices();
       distinctExercice();
       sortingExercice();
+      collectExercice();
     }
 
+    public static void collectExercice() {
+        List<Integer> numbers = List.of(12, 9, 13, 4, 6, 2, 4, 12, 15);
+        numbers.stream().map(x -> x * x).collect(Collectors.toList());
+    }
     public static void sortingExercice() {
         // we can so it for strings also..
         List<Integer> numbers = List.of(0, 1,2,3,4,5,6, 0, 4 ,5,6);
