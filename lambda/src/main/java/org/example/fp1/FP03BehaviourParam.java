@@ -14,15 +14,15 @@ public class FP03BehaviourParam {
         //filterAndPrint(numbers, x -> x % 2 == 0);
         //filterAndPrint(numbers, x -> x % 2 == 1);
 
-        mapAndPrint(numbers, x -> x * x);
+        mapAndPrint(numbers, x -> x * x, Collectors.toList());
 
     }
 
     private static void mapAndPrint(List<Integer> numbers, Function<Integer,
-            Integer> function) {
+            Integer> function, Collector<? super Integer, ? extends Object, ? extends List<Object>> collect) {
         List<Object> n =  numbers.stream()
                 .map(function)
-                .collect(Collectors.toList());
+                .collect(collect);
     }
     private static void filterAndPrint(List<Integer> numbers,  Predicate<? super Integer> predicate) {
         numbers.stream()
