@@ -1,7 +1,9 @@
 package org.example.fp1;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.*;
+import java.util.stream.Collectors;
 
 class Course {
     private String name;
@@ -90,8 +92,34 @@ public class FP04CustomClass {
         // if there is one that satisfy the predicate
         System.out.println(courses.stream().anyMatch(coursePredicate));
 
+        // sorting
+        Comparator<Course> comparingByNoOfStudentsIncreasing = Comparator.comparing(Course::getNoOfStudents);
+        Comparator<Course> comparingByNoOfStudentsDecreasing = Comparator.comparing(Course::getNoOfStudents).reversed();
 
+
+
+        System.out.println(courses.stream()
+                .sorted(comparingByNoOfStudentsDecreasing)
+                .limit(5) // limit to 5 elements..
+                .takeWhile(course -> course.getReviewScore() >= 95) // take while we satisfy the predicate
+                .dropWhile(course -> course.getReviewScore() >= 95) // drop while we satisfy the predicate)
+                .collect(Collectors.toList()));
+
+        System.out.println(courses.stream()
+                .sorted(comparingByNoOfStudentsDecreasing)
+                .skip(3) // skip the first 3 elements..
+                .collect(Collectors.toList()));
+
+
+        Comparator<Course> comparingByNoOfStudentsAndReviews = Comparator
+                .comparing(Course::getNoOfStudents)
+                .thenComparing(Course::getReviewScore)
+                .reversed();
+
+        //max, min returns Optional
+        courses.stream().max(Comparator.comparing(Course::getNoOfStudents));
     }
+
 
 
 
