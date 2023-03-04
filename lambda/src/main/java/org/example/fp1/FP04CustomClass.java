@@ -118,6 +118,29 @@ public class FP04CustomClass {
 
         //max, min returns Optional
         courses.stream().max(Comparator.comparing(Course::getNoOfStudents));
+
+
+        // .sum() to get the sum of all ints
+        // .average
+        // .count
+
+        // group by
+
+        courses.stream()
+                .collect(Collectors.groupingBy(Course::getCategory));
+
+        courses.stream()
+                .collect(Collectors.groupingBy(Course::getCategory, Collectors.counting()));
+
+        courses.stream()
+                .collect(Collectors.groupingBy(Course::getCategory,
+                        Collectors.maxBy(Comparator.comparing(Course::getReviewScore))));
+
+        courses.stream()
+                .collect(Collectors.groupingBy(Course::getCategory,
+                        Collectors.mapping(Course::getName, Collectors.toList())));
+
+
     }
 
 
